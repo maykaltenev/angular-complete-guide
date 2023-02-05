@@ -18,8 +18,41 @@
             {{ odd }}
           </li>
         </div>
+        <!-- <div *ngIf="!onlyOdd">
+          <li class="list-group-item" *ngFor="let even of evenNumbers">
+            {{ even }}
+          </li>
+        </div> -->
+        <!-- !! "star"/* is transforming to ng template syntax [ngIf] -->
+        <!-- <ng-template [ngIf]="!onlyOdd">
+          <div>
+            <li
+              class="list-group-item"
+              *ngFor="let odd of oddNumbers"
+              [ngStyle]="{
+                backgroundColor: odd % 2 !== 0 ? 'yellow' : 'transparent'
+              }"
+              [ngClass]="{ odd: odd % 2 !== 0 }"
+            >
+              {{ odd }}
+            </li>
+          </div>
+        </ng-template> -->
         <div *ngIf="!onlyOdd">
           <li class="list-group-item" *ngFor="let even of evenNumbers">
+            {{ even }}
+          </li>
+        </div>
+
+        <div *appUnless="onlyOdd">
+          <li
+            class="list-group-item"
+            [ngClass]="{ odd: even % 2 !== 0 }"
+            *ngFor="let odd of oddNumbers"
+            [ngStyle]="{
+              backgroundColor: even % 2 !== 0 ? 'yellow' : 'transparent'
+            }"
+          >
             {{ even }}
           </li>
         </div>
@@ -28,6 +61,13 @@
       <p [appBetterHighlight]="'red'" defaultColor="yellow">
         Style mew with basic appBasicHighlight
       </p>
+      <div [ngSwitch]="value">
+        <p *ngSwitchCase="5">Value is 5</p>
+        <p *ngSwitchCase="10">Value is 10</p>
+        <p *ngSwitchCase="100">Value is 100</p>
+        <p *ngSwitchCase="200">Value is 200</p>
+        <p *ngSwitchDefault="300">Value is 300</p>
+      </div>
     </div>
   </div>
 </div>
